@@ -9,7 +9,7 @@ export default function WelcomePage() {
       <div className="grid gap-5 md:grid-cols-2">
         <div className="p-4 rounded-lg border bg-white/70 backdrop-blur-sm shadow-sm">
           <h2 className="font-semibold text-gray-800 mb-1 text-sm">Where to Begin</h2>
-          <p className="text-xs text-gray-600">Start with "Getting Started with AI" for low-risk adoption steps.</p>
+          <p className="text-xs text-gray-600">Start with &quot;Getting Started with AI&quot; for low-risk adoption steps.</p>
         </div>
         <div className="p-4 rounded-lg border bg-white/70 backdrop-blur-sm shadow-sm">
           <h2 className="font-semibold text-gray-800 mb-1 text-sm">Explore Prompts</h2>
