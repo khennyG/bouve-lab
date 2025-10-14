@@ -179,6 +179,14 @@ export default function SectionFacultySubmissions({
         )}
       </div>
 
+      {/* Surface live stream errors outside modal as well (helps diagnose production issues) */}
+      {streamError && (
+        <div role="alert" className="text-[12px] text-red-700 bg-red-50 border border-red-200 rounded-md px-3 py-2">
+          Live updates failed: {streamError}
+          <span className="ml-1 text-red-600/80">(Check Firebase env vars and Firestore rules for this collection.)</span>
+        </div>
+      )}
+
       {openModal && (
         <div className="fixed inset-0 z-[60]" role="dialog" aria-modal="true" aria-labelledby="section-submit-title">
           <div className="absolute inset-0 bg-black/40" onClick={() => setOpenModal(false)} />

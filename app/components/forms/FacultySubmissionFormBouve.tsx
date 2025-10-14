@@ -182,6 +182,14 @@ export default function FacultySubmissionFormBouve({ selectedDiscipline }: { sel
         )}
       </div>
 
+      {/* Surface live stream errors outside modal (helps diagnose production issues) */}
+      {streamError && (
+        <div role="alert" className="text-[12px] text-red-700 bg-red-50 border border-red-200 rounded-md px-3 py-2">
+          Live updates failed: {streamError}
+          <span className="ml-1 text-red-600/80">(Check Firebase env vars and Firestore rules for this collection.)</span>
+        </div>
+      )}
+
       {/* Modal */}
       {openModal && (
         <div className="fixed inset-0 z-[60]" role="dialog" aria-modal="true" aria-labelledby="submit-redesign-title">
