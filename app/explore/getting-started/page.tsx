@@ -1,6 +1,8 @@
 "use client";
 import { useState } from 'react';
 import 'katex/dist/katex.min.css';
+import FacultySubmissionFormBouve from '@/app/components/forms/FacultySubmissionFormBouve';
+import SectionFacultySubmissions from '@/app/components/forms/SectionFacultySubmissions';
 
 const ACCORDION_ITEMS = [
   'Redesign Assignments',
@@ -546,12 +548,19 @@ export default function GettingStartedPage() {
   const toggleExample = (id: string) => {
     setOpenExampleIds(prev => {
       const next = new Set(prev);
-      next.has(id) ? next.delete(id) : next.add(id);
+      if (next.has(id)) {
+        next.delete(id);
+      } else {
+        next.add(id);
+      }
       return next;
     });
   };
 
   const toggle = (idx: number) => setOpenIndex(prev => prev === idx ? null : idx);
+
+  // Map accordion index to Firestore collection name for counts
+  // No count badges; success toasts remain handled within submission components
 
   // Accent color configuration for each panel (index aligned with ACCORDION_ITEMS)
   const ACCENT_CONFIG: { text: string; textHover: string; textExpanded: string; borderExpanded: string; borderHover: string; ring: string; iconCollapsed: string; iconHover: string; iconExpanded: string }[] = [
@@ -665,6 +674,11 @@ export default function GettingStartedPage() {
                           })}
                         </div>
                       </div>
+                      {/* Faculty submission form (live Firestore submissions) */}
+                      <div className="mt-2">
+                        <FacultySubmissionFormBouve selectedDiscipline={selectedDiscipline as unknown as 'Nursing' | 'Pharmacy' | 'Public Health' | 'Speech-Language Pathology' | 'Health Science' | 'Pharmaceutical Sciences'} />
+                      </div>
+
                       {/* Examples list */}
                       <div className="space-y-5">
                         <div className="h-px bg-gray-200" />
@@ -761,6 +775,17 @@ export default function GettingStartedPage() {
                           })}
                         </div>
                       </div>
+                      {/* Faculty submission form for Lecture Notes */}
+                      <div className="mt-2">
+                        <SectionFacultySubmissions
+                          selectedDiscipline={selectedDiscipline as unknown as 'Nursing' | 'Pharmacy' | 'Public Health' | 'Speech-Language Pathology' | 'Health Science' | 'Pharmaceutical Sciences'}
+                          collectionName="lectureNotesBouve"
+                          submitButtonText="Submit a lecture redesign"
+                          modalTitle="Submit a Lecture Redesign"
+                          oldLabel="Old Approach"
+                          newLabel="Reimagined Lecture"
+                        />
+                      </div>
                       {/* Examples list */}
                       <div className="space-y-5">
                         <div className="h-px bg-gray-200" />
@@ -854,6 +879,17 @@ export default function GettingStartedPage() {
                             );
                           })}
                         </div>
+                      </div>
+                      {/* Faculty submission form for Case Studies */}
+                      <div className="mt-2">
+                        <SectionFacultySubmissions
+                          selectedDiscipline={selectedDiscipline as unknown as 'Nursing' | 'Pharmacy' | 'Public Health' | 'Speech-Language Pathology' | 'Health Science' | 'Pharmaceutical Sciences'}
+                          collectionName="caseStudiesBouve"
+                          submitButtonText="Submit a case redesign"
+                          modalTitle="Submit a Case Redesign"
+                          oldLabel="Old Approach"
+                          newLabel="Reimagined Case"
+                        />
                       </div>
                       {/* Examples list */}
                       <div className="space-y-5">
@@ -976,6 +1012,17 @@ export default function GettingStartedPage() {
                           })}
                         </div>
                       </div>
+                      {/* Faculty submission form for Scaffold Student Work */}
+                      <div className="mt-2">
+                        <SectionFacultySubmissions
+                          selectedDiscipline={selectedDiscipline as unknown as 'Nursing' | 'Pharmacy' | 'Public Health' | 'Speech-Language Pathology' | 'Health Science' | 'Pharmaceutical Sciences'}
+                          collectionName="scaffoldAssignmentsBouve"
+                          submitButtonText="Submit a scaffolded assignment"
+                          modalTitle="Submit a Scaffolded Assignment"
+                          oldLabel="Old Assignment"
+                          newLabel="Redesigned Scaffolded Assignment"
+                        />
+                      </div>
                       {/* Examples list */}
                       <div className="space-y-5">
                         <div className="h-px bg-gray-200" />
@@ -1067,6 +1114,17 @@ export default function GettingStartedPage() {
                             );
                           })}
                         </div>
+                      </div>
+                      {/* Faculty submission form for In-Class Activities */}
+                      <div className="mt-2">
+                        <SectionFacultySubmissions
+                          selectedDiscipline={selectedDiscipline as unknown as 'Nursing' | 'Pharmacy' | 'Public Health' | 'Speech-Language Pathology' | 'Health Science' | 'Pharmaceutical Sciences'}
+                          collectionName="inClassActivitiesBouve"
+                          submitButtonText="Submit an in-class activity"
+                          modalTitle="Submit an In-Class Activity"
+                          oldLabel="Old Activity"
+                          newLabel="Redesigned Activity"
+                        />
                       </div>
                       {/* Examples list */}
                       <div className="space-y-5">
@@ -1161,6 +1219,17 @@ export default function GettingStartedPage() {
                             );
                           })}
                         </div>
+                      </div>
+                      {/* Faculty submission form for Feedback & Rubrics */}
+                      <div className="mt-2">
+                        <SectionFacultySubmissions
+                          selectedDiscipline={selectedDiscipline as unknown as 'Nursing' | 'Pharmacy' | 'Public Health' | 'Speech-Language Pathology' | 'Health Science' | 'Pharmaceutical Sciences'}
+                          collectionName="feedbackRubricsBouve"
+                          submitButtonText="Submit a feedback/rubric"
+                          modalTitle="Submit Feedback/Rubric"
+                          oldLabel="Old Activity"
+                          newLabel="AI-Enhanced Approach"
+                        />
                       </div>
                       {/* Examples list */}
                       <div className="space-y-5">

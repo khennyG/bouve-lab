@@ -9,6 +9,7 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "firebase": "^12.4.0",
     "framer-motion": "^12.23.22",
     "katex": "^0.16.23",
     "next": "15.5.4",
