@@ -35,34 +35,22 @@ function IconFilter(props: React.SVGProps<SVGSVGElement>) {
 }
 // (Removed IconUser; no longer displaying contributor info)
 
-export default function PromptLibraryAltPage() {
-  const [searchQuery, setSearchQuery] = useState('')
-  const [selectedCategory, setSelectedCategory] = useState('All')
-  const [copiedId, setCopiedId] = useState<number | null>(null)
-  const [activePrompt, setActivePrompt] = useState<{
-    id: number
-    title: string
-    category: string
-    contributor: string
-    prompt: string
-  } | null>(null)
-  const closeButtonRef = useRef<HTMLButtonElement | null>(null)
+// Static dataset extracted to module scope to avoid re-creating on each render
+const CATEGORIES = [
+  'All',
+  'Nursing',
+  'Public Health',
+  'Pharmacy',
+  'Pharmaceutical Sciences',
+  'Speech-Language Pathology',
+  'Health Science',
+  'Health Policy',
+  'Clinical Education',
+  'Research',
+  'Patient Communication',
+] as const
 
-  const categories = [
-    'All',
-    'Nursing',
-    'Public Health',
-    'Pharmacy',
-    'Pharmaceutical Sciences',
-    'Speech-Language Pathology',
-    'Health Science',
-    'Health Policy',
-    'Clinical Education',
-    'Research',
-    'Patient Communication',
-  ]
-
-  const prompts = [
+const PROMPTS = [
     {
       id: 1,
       title: 'Act as a Nursing Clinical Educator',
@@ -305,9 +293,22 @@ export default function PromptLibraryAltPage() {
     },
   ] as const
 
+export default function PromptLibraryAltPage() {
+  const [searchQuery, setSearchQuery] = useState('')
+  const [selectedCategory, setSelectedCategory] = useState('All')
+  const [copiedId, setCopiedId] = useState<number | null>(null)
+  const [activePrompt, setActivePrompt] = useState<{
+    id: number
+    title: string
+    category: string
+    contributor: string
+    prompt: string
+  } | null>(null)
+  const closeButtonRef = useRef<HTMLButtonElement | null>(null)
+
   const filteredPrompts = useMemo(() => {
     const q = searchQuery.toLowerCase()
-    return prompts.filter((p) => {
+    return PROMPTS.filter((p) => {
       const matchesSearch =
         p.title.toLowerCase().includes(q) ||
         p.prompt.toLowerCase().includes(q) ||
@@ -315,7 +316,7 @@ export default function PromptLibraryAltPage() {
       const matchesCategory = selectedCategory === 'All' || p.category === selectedCategory
       return matchesSearch && matchesCategory
     })
-  }, [searchQuery, selectedCategory, prompts])
+  }, [searchQuery, selectedCategory])
 
   const copyToClipboard = (text: string, id: number) => {
     navigator.clipboard.writeText(text)
@@ -364,7 +365,7 @@ export default function PromptLibraryAltPage() {
 
           <div className="flex items-center gap-2 overflow-x-auto pb-2">
             <IconFilter className="w-5 h-5 text-gray-500 flex-shrink-0" />
-            {categories.map((c) => (
+            {CATEGORIES.map((c) => (
               <button
                 key={c}
                 onClick={() => setSelectedCategory(c)}

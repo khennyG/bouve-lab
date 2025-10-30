@@ -1,6 +1,7 @@
 "use client"
 
 import React, { useState } from 'react'
+import Link from 'next/link'
 
 export default function PromptEngineeringPage() {
   const [hoveredCard, setHoveredCard] = useState<string | null>(null)
@@ -137,7 +138,7 @@ export default function PromptEngineeringPage() {
                 <div className="mb-4 space-y-4">
                   <span className="inline-block bg-gray-400 text-gray-800 px-3 py-1 rounded-full text-sm font-semibold mb-3">Weak Prompt</span>
                   <div className="bg-gray-100 rounded-lg p-4 mb-4">
-                    <p className="text-gray-800 italic text-sm md:text-base leading-6">"{examples[currentExample].weak.prompt}"</p>
+                    <p className="text-gray-800 italic text-sm md:text-base leading-6">&ldquo;{examples[currentExample].weak.prompt}&rdquo;</p>
                   </div>
                   <div className="bg-white rounded-lg p-4 border border-gray-200">
                     <p className="text-sm text-gray-500 font-semibold mb-2">Output Preview:</p>
@@ -161,7 +162,7 @@ export default function PromptEngineeringPage() {
                 <div className="mb-4 space-y-4">
                   <span className="inline-block bg-green-600 text-white px-3 py-1 rounded-full text-sm font-semibold mb-3">Strong Prompt</span>
                   <div className="bg-white rounded-lg p-5 mb-4 border border-green-200">
-                    <p className="text-gray-800 font-medium text-sm md:text-base leading-6">"{examples[currentExample].strong.prompt}"</p>
+                    <p className="text-gray-800 font-medium text-sm md:text-base leading-6">&ldquo;{examples[currentExample].strong.prompt}&rdquo;</p>
                   </div>
                   <div className="bg-white rounded-lg p-5 border border-green-200">
                     <p className="text-sm text-green-800 font-semibold mb-2">Output Preview:</p>
@@ -248,9 +249,9 @@ export default function PromptEngineeringPage() {
         </div>
 
         <div className="text-center">
-          <a href="/explore/prompts" className="inline-block">
+          <Link href="/explore/prompts" className="inline-block">
             <span className="bg-gray-200 hover:bg-gray-300 text-gray-800 px-6 py-3 rounded-lg font-medium transition-all">Go to Prompt Library</span>
-          </a>
+          </Link>
         </div>
       </div>
 
@@ -261,11 +262,11 @@ export default function PromptEngineeringPage() {
           <p className="text-xl text-gray-700 mb-10">Explore the Prompt Library.</p>
 
           <div className="flex flex-wrap justify-center gap-4">
-            <a href="/explore/prompts" className="inline-block">
+            <Link href="/explore/prompts" className="inline-block">
               <span className="bg-purple-600 hover:bg-purple-700 text-white px-8 py-4 rounded-lg font-semibold text-lg transition-all shadow-lg hover:shadow-xl transform hover:scale-105">
                 Go to Prompt Library
               </span>
-            </a>
+            </Link>
           </div>
         </div>
       </div>
