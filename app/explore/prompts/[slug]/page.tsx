@@ -1,9 +1,10 @@
 import { notFound } from "next/navigation";
-import { USE_CASES } from "../_data.chs";
+import { readyUseCases, type UseCase } from "../_data";
 import UseCaseDetailClient from "./UseCaseDetailClient";
 
-export default function UseCaseDetailPage({ params }: { params: { slug: string } }) {
-  const useCase = USE_CASES.find((u) => u.id === params.slug);
+export default async function UseCaseDetailPage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
+  const useCase = readyUseCases.find((u: UseCase) => u.id === slug);
   if (!useCase) return notFound();
-  return <UseCaseDetailClient useCase={useCase} />;
+  return <UseCaseDetailClient caseData={useCase} />;
 }

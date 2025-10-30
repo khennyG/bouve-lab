@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import { db } from "@/lib/firebase";
 import { addDoc, collection, onSnapshot, serverTimestamp } from "firebase/firestore";
 
@@ -24,7 +24,7 @@ type FacultyPrompt = {
   createdAt?: unknown;
 };
 
-const ACCENT = "#e85c4a"; // Using existing site accent for consistency
+// Accent color is applied directly in classNames where needed.
 
 const readyPrompts: Array<{
   title: string;
