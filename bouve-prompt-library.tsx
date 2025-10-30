@@ -1,10 +1,49 @@
 import React, { useState, useMemo } from 'react';
-import { Search, Copy, Check, Filter, User } from 'lucide-react';
+
+// Inline icons to avoid external dependency on 'lucide-react'
+function IconSearch(props: React.SVGProps<SVGSVGElement>) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}>
+      <circle cx="11" cy="11" r="8" />
+      <path d="M21 21l-3.5-3.5" />
+    </svg>
+  );
+}
+function IconCopy(props: React.SVGProps<SVGSVGElement>) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}>
+      <rect x="9" y="9" width="13" height="13" rx="2" />
+      <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
+    </svg>
+  );
+}
+function IconCheck(props: React.SVGProps<SVGSVGElement>) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}>
+      <path d="m20 6-11 11-5-5" />
+    </svg>
+  );
+}
+function IconFilter(props: React.SVGProps<SVGSVGElement>) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}>
+      <path d="M22 3H2l8 9v7l4 2v-9Z" />
+    </svg>
+  );
+}
+function IconUser(props: React.SVGProps<SVGSVGElement>) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}>
+      <path d="M12 12a5 5 0 1 0-5-5 5 5 0 0 0 5 5Z" />
+      <path d="M20 21a8 8 0 1 0-16 0" />
+    </svg>
+  );
+}
 
 const BouvePromptLibrary = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('All');
-  const [copiedId, setCopiedId] = useState(null);
+  const [copiedId, setCopiedId] = useState<number | null>(null);
 
   const categories = [
     'All',
@@ -138,7 +177,7 @@ const BouvePromptLibrary = () => {
     });
   }, [searchQuery, selectedCategory]);
 
-  const copyToClipboard = (text, id) => {
+  const copyToClipboard = (text: string, id: number) => {
     navigator.clipboard.writeText(text);
     setCopiedId(id);
     setTimeout(() => setCopiedId(null), 2000);
@@ -160,7 +199,7 @@ const BouvePromptLibrary = () => {
           {/* Search Bar */}
           <div className="mb-4">
             <div className="relative">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+              <IconSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
               <input
                 type="text"
                 placeholder="Search prompts..."
@@ -173,7 +212,7 @@ const BouvePromptLibrary = () => {
 
           {/* Category Filters */}
           <div className="flex items-center gap-2 overflow-x-auto pb-2">
-            <Filter className="w-5 h-5 text-gray-500 flex-shrink-0" />
+            <IconFilter className="w-5 h-5 text-gray-500 flex-shrink-0" />
             {categories.map((category) => (
               <button
                 key={category}
@@ -223,9 +262,9 @@ const BouvePromptLibrary = () => {
                       title="Copy prompt"
                     >
                       {copiedId === promptItem.id ? (
-                        <Check className="w-5 h-5 text-green-600" />
+                        <IconCheck className="w-5 h-5 text-green-600" />
                       ) : (
-                        <Copy className="w-5 h-5 text-gray-500" />
+                        <IconCopy className="w-5 h-5 text-gray-500" />
                       )}
                     </button>
                   </div>
@@ -235,7 +274,7 @@ const BouvePromptLibrary = () => {
                   </h3>
                   
                   <div className="flex items-center gap-2 text-sm text-gray-500">
-                    <User className="w-4 h-4" />
+                    <IconUser className="w-4 h-4" />
                     <span>Contributed by: {promptItem.contributor}</span>
                   </div>
                 </div>
@@ -257,12 +296,12 @@ const BouvePromptLibrary = () => {
                   >
                     {copiedId === promptItem.id ? (
                       <>
-                        <Check className="w-4 h-4" />
+                        <IconCheck className="w-4 h-4" />
                         Copied!
                       </>
                     ) : (
                       <>
-                        <Copy className="w-4 h-4" />
+                        <IconCopy className="w-4 h-4" />
                         Copy Prompt
                       </>
                     )}
